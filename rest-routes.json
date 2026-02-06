@@ -1,13 +1,23 @@
 [
 	{
 		"path": "/mws/v1/mcp/get_wiki_map",
-		"class": "MWStake\\MediaWiki\\Component\\MCP\\Rest\\GetWikiMapHandler"
+		"class": "MWStake\\MediaWiki\\Component\\MCP\\Rest\\GetWikiMapHandler",
+		"services": [
+			"HookContainer", "MainConfig"
+		]
 	},
 	{
 		"path": "/mws/v1/mcp/list_tools",
 		"class": "MWStake\\MediaWiki\\Component\\MCP\\Rest\\ListToolsHandler",
 		"services": [
-
+			"MWStake.MCP.ToolRegistry"
+		]
+	},
+	{
+		"path": "/mws/v1/mcp/run_tool",
+		"class": "MWStake\\MediaWiki\\Component\\MCP\\Rest\\ExecuteToolHandler",
+		"services": [
+			"MWStake.MCP.ToolRegistry", "ObjectFactory"
 		]
 	}
 ]
