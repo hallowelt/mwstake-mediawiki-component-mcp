@@ -1,0 +1,13 @@
+[
+	{
+		"path": "/mws/v1/mcp/get_wiki_map",
+		"class": "MWStake\\MediaWiki\\Component\\MCP\\Rest\\GetWikiMapHandler"
+	},
+	{
+		"path": "/mws/v1/mcp/list_tools",
+		"class": "MWStake\\MediaWiki\\Component\\MCP\\Rest\\ListToolsHandler",
+		"services": [
+
+		]
+	}
+]
