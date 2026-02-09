@@ -17,7 +17,8 @@ class GenericTool implements IMcpTool {
 		private readonly string $key,
 		private readonly ToolDefinition $definition,
 		private readonly IMcpToolExecutionHandler $executionHandler
-	) {}
+	) {
+	}
 
 	/**
 	 * @return string

@@ -2,8 +2,16 @@
 
 namespace MWStake\MediaWiki\Component\MCP;
 
-class ToolDefinition implements \JsonSerializable {
+use JsonSerializable;
 
+class ToolDefinition implements JsonSerializable {
+
+	/**
+	 * @param string $title
+	 * @param string $description
+	 * @param FieldSchema|null $inputSchema
+	 * @param FieldSchema $outputSchema
+	 */
 	public function __construct(
 		private readonly string $title,
 		private readonly string $description,

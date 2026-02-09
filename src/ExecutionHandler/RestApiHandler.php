@@ -20,7 +20,8 @@ class RestApiHandler implements IMcpToolExecutionHandler {
 		private readonly array $headers = [
 			'Content-Type' => 'application/json'
 		]
-	) {}
+	) {
+	}
 
 	/**
 	 * @return array

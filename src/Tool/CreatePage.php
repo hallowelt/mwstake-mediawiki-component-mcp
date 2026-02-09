@@ -10,6 +10,9 @@ use MWStake\MediaWiki\Component\MCP\ToolDefinition;
 
 class CreatePage implements IMcpTool {
 
+	/**
+	 * @return string
+	 */
 	public function getKey(): string {
 		return 'createPage';
 	}
@@ -28,7 +31,8 @@ class CreatePage implements IMcpTool {
 		$outputSchema = ( new FieldSchema() )
 			->addInteger( 'id', 'ID of the page that was just created' )
 			->addString( 'title', 'Title of the page that was just created' )
-			->addString( 'key', 'DB-key of the page that was just created' );
+			->addString( 'key', 'DB-key of the page that was just created' )
+			->setRequired( [ 'id', 'title', 'key' ] );
 
 		return new ToolDefinition(
 			'Create a wiki page',
@@ -42,6 +46,6 @@ class CreatePage implements IMcpTool {
 	 * @return IMcpToolExecutionHandler
 	 */
 	public function getExecutionMethod(): IMcpToolExecutionHandler {
-		return new RestApiHandler( '/v1/page/', 'POST' );
+		return new RestApiHandler( '/v1/page', 'POST' );
 	}
 }

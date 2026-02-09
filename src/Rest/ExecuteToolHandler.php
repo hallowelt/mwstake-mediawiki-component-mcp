@@ -5,9 +5,9 @@ namespace MWStake\MediaWiki\Component\MCP\Rest;
 use MediaWiki\Rest\HttpException;
 use MediaWiki\Rest\Response;
 use MediaWiki\Rest\SimpleHandler;
-use MWStake\MediaWiki\Component\AlertBanners\ObjectFactory;
 use MWStake\MediaWiki\Component\MCP\ExecutionHandler\DirectExecution;
 use MWStake\MediaWiki\Component\MCP\ToolRegistry;
+use Wikimedia\ObjectFactory\ObjectFactory;
 use Wikimedia\ParamValidator\ParamValidator;
 
 class ExecuteToolHandler extends SimpleHandler {
@@ -47,11 +47,17 @@ class ExecuteToolHandler extends SimpleHandler {
 		try {
 			$res = $executor->execute( $tool, $params['args'] ?? [] );
 		} catch ( \Exception $e ) {
-			throw new HttpException( "Execution of tool with key {$params['toolKey']} failed: " . $e->getMessage(), 500 );
+			throw new HttpException(
+				"Execution of tool with key {$params['toolKey']} failed: " . $e->getMessage(),
+				500
+			);
 		}
 		return $this->getResponseFactory()->createJson( $res );
 	}
 
+	/**
+	 * @return array[]
+	 */
 	public function getBodyParamSettings(): array {
 		return [
 			'toolKey' => [

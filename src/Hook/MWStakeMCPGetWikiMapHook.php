@@ -5,8 +5,9 @@ namespace MWStake\MediaWiki\Component\MCP\Hook;
 interface MWStakeMCPGetWikiMapHook {
 
 	/**
-	 * @return array
+	 * @param array &$map
+	 * @return void
 	 */
-	public function onMWStakeMCPGetWikiMap( &$map ): array;
+	public function onMWStakeMCPGetWikiMap( &$map ): void;
 
 }

@@ -1,6 +1,7 @@
 <?php
 
-use MWStake\MediaWiki\Component\TokenAuthenticator\ServiceTokenSessionProvider;
+use MediaWiki\MediaWikiServices;
+use MWStake\MediaWiki\Component\MCP\Tool\CreatePage;
 
 if ( defined( 'MWSTAKE_MEDIAWIKI_COMPONENT_MCP_VERSION' ) ) {
 	return;
@@ -15,4 +16,8 @@ MWStake\MediaWiki\ComponentLoader\Bootstrapper::getInstance()
 	$restFilePath = wfRelativePath( __DIR__ . '/rest-routes.json', $GLOBALS['IP'] );
 	$GLOBALS['wgRestAPIAdditionalRouteFiles'][] = $restFilePath;
 
+	$GLOBALS['wgHooks']['MediaWikiServices'][] = static function ( MediaWikiServices $services ) {
+		$registry = $services->getService( 'MWStake.MCP.ToolRegistry' );
+		$registry->registerTool( new CreatePage() );
+	};
 } );

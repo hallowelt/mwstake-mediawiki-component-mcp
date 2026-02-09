@@ -14,8 +14,9 @@ $GLOBALS['mwsgTokenAuthenticatorServiceAllowedRestPaths'] = $GLOBALS['mwsgTokenA
 
 $GLOBALS['mwsgTokenAuthenticatorServiceAllowedRestPaths'][] = '/mws/v1/mcp/get_wiki_map';
 $GLOBALS['mwsgTokenAuthenticatorServiceAllowedRestPaths'][] = '/mws/v1/app-token/generate';
+$GLOBALS['mwsgTokenAuthenticatorServiceAllowedRestPaths'][] = '/mws/v1/app-token/verify';
 $GLOBALS['mwsgTokenAuthenticatorServiceAllowedRestPaths'][] = '/mws/v1/mcp/list_tools';
-
+$GLOBALS['mwsgTokenAuthenticatorServiceAllowedRestPaths'][] = '/mws/v1/mcp/get_wiki_map';
 ```
 
 ## Adding tools
@@ -138,3 +139,5 @@ return new DirectExecution( [
     'args' => ...
 ] );
 ```
+
+See `examples/Examples.MD` for more examples of tools and execution methods.

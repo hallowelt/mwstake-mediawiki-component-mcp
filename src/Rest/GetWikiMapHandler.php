@@ -2,15 +2,20 @@
 
 namespace MWStake\MediaWiki\Component\MCP\Rest;
 
+use Config;
 use MediaWiki\HookContainer\HookContainer;
 use MediaWiki\Rest\SimpleHandler;
 use MediaWiki\WikiMap\WikiMap;
 
 class GetWikiMapHandler extends SimpleHandler {
-	
+
+	/**
+	 * @param HookContainer $hookContainer
+	 * @param Config $config
+	 */
 	public function __construct(
 		private readonly HookContainer $hookContainer,
-		private readonly \Config $config
+		private readonly Config $config
 	) {
 	}
 

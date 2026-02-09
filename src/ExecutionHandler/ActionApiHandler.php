@@ -11,12 +11,15 @@ class ActionApiHandler implements IMcpToolExecutionHandler {
 
 	/**
 	 * @param string $action
+	 * @param array $defaultParams
 	 * @param string $method
 	 */
 	public function __construct(
 		private readonly string $action,
+		private readonly array $defaultParams = [],
 		private readonly string $method = 'POST'
-	) {}
+	) {
+	}
 
 	/**
 	 * @return array
@@ -25,6 +28,7 @@ class ActionApiHandler implements IMcpToolExecutionHandler {
 		return [
 			'type' => 'api',
 			'apiType' => 'action',
+			'defaultParams' => $this->defaultParams,
 			'action' => $this->action,
 			'method' => $this->method
 		];

@@ -7,6 +7,10 @@ class ToolRegistry {
 	/** @var IMcpTool[] */
 	private array $tools = [];
 
+	/**
+	 * @param IMcpTool $tool
+	 * @return void
+	 */
 	public function registerTool( IMcpTool $tool ): void {
 		$this->tools[$tool->getKey()] = $tool;
 	}

@@ -14,6 +14,7 @@
 		]
 	},
 	{
+		"method": "POST",
 		"path": "/mws/v1/mcp/run_tool",
 		"class": "MWStake\\MediaWiki\\Component\\MCP\\Rest\\ExecuteToolHandler",
 		"services": [

@@ -8,10 +8,16 @@ class FieldSchema implements \JsonSerializable {
 	public const NUMBER = 'number';
 	public const INTEGER = 'integer';
 	public const OBJECT = 'object';
+	public const ARRAY = 'array';
 
+	/** @var array */
 	private array $fields = [];
+	/** @var array */
 	private array $required = [];
 
+	/**
+	 * @param array|null $fields
+	 */
 	public function __construct( ?array $fields = [] ) {
 		if ( $fields ) {
 			$this->fields = $fields;
@@ -79,7 +85,22 @@ class FieldSchema implements \JsonSerializable {
 	 * @return $this
 	 */
 	public function addObject( string $name, string $description, FieldSchema $schema ): self {
-		return $this->add( $name, $description, $schema->jsonSerialize());
+		return $this->add( $name, $description, $schema->jsonSerialize() );
+	}
+
+	/**
+	 * @param string $name
+	 * @param string $description
+	 * @param FieldSchema $items
+	 * @return $this
+	 */
+	public function addArray( string $name, string $description, FieldSchema $items ): self {
+		$this->fields[$name] = [
+			'type' => self::ARRAY,
+			'description' => $description,
+			'items' => $items->jsonSerialize()
+		];
+		return $this;
 	}
 
 	/**
@@ -90,15 +111,7 @@ class FieldSchema implements \JsonSerializable {
 		if ( !isset( $this->fields[$name] ) ) {
 			return $this;
 		}
-		if ( is_array( $this->fields[$name]['type'] ) ) {
-			if ( !in_array( 'null', $this->fields[$name]['type'] ) ) {
-				$this->fields[$name]['type'][] = 'null';
-			}
-		} else {
-			if ( $this->fields[$name]['type'] !== 'null' ) {
-				$this->fields[$name]['type'] = [ $this->fields[$name]['type'], 'null' ];
-			}
-		}
+		$this->fields[$name]['nullable'] = true;
 		return $this;
 	}
 
@@ -130,7 +143,9 @@ class FieldSchema implements \JsonSerializable {
 	public function jsonSerialize() {
 		return [
 			'type' => 'object',
-			'properties' => $this->fields
+			'properties' => $this->fields,
+			'required' => $this->required,
+			'additionalProperties' => false,
 		];
 	}
 }
