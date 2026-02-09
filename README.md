@@ -141,3 +141,9 @@ return new DirectExecution( [
 ```
 
 See `examples/Examples.MD` for more examples of tools and execution methods.
+
+## Notes
+- Avoid implementing tools that run `POST` requests against ActionAPI. It requires the CSRF token to be retrieved,
+increasing the traffic and latency. Use REST counterparts wherever possible
+- Tool list is always retrieved from `w`. So it is always same for all instances, and all tools retrieved need
+to be available for all intances (which is the case anyways, but just to mention :))
